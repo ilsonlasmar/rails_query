@@ -5,19 +5,26 @@ require_relative "lib/rails_query/version"
 Gem::Specification.new do |spec|
   spec.name = "rails_query"
   spec.version = RailsQuery::VERSION
-  spec.authors = ["TODO: Write your name"]
-  spec.email = ["TODO: Write your email address"]
+  spec.authors = ["Ilson Lasmar"]
+  spec.email = ["ilson.lasmar@gmail.com"]
 
-  spec.summary = "TODO: Write a short summary, because RubyGems requires one."
-  spec.description = "TODO: Write a longer description or delete this line."
-  spec.homepage = "TODO: Put your gem's website or public repo URL here."
+  spec.summary = "Declarative query caching layer with lifecycle management for Rails"
+  spec.description = <<~DESC
+    RailsQuery provides a declarative abstraction for fetching, caching, and
+    managing remote or expensive data in Rails applications.
+
+    Inspired by modern data-fetching patterns, it introduces query lifecycle
+    concepts such as caching, stale-while-revalidate, automatic invalidation,
+    and request deduplication, while remaining idiomatic to the Rails ecosystem.
+  DESC
+  spec.homepage = "https://github.com/ilsonlasmar/rails_query"
   spec.license = "MIT"
   spec.required_ruby_version = ">= 3.2.0"
 
-  spec.metadata["allowed_push_host"] = "TODO: Set to your gem server 'https://example.com'"
+  spec.metadata["allowed_push_host"] = "https://rubygems.org"
   spec.metadata["homepage_uri"] = spec.homepage
-  spec.metadata["source_code_uri"] = "TODO: Put your gem's public repo URL here."
-  spec.metadata["changelog_uri"] = "TODO: Put your gem's CHANGELOG.md URL here."
+  spec.metadata["source_code_uri"] = "https://github.com/ilsonlasmar/rails_query"
+  spec.metadata["changelog_uri"] = "https://github.com/ilsonlasmar/rails_query/blob/main/CHANGELOG.md"
 
   # Specify which files should be added to the gem when it is released.
   # The `git ls-files -z` loads the files in the RubyGem that have been added into git.
