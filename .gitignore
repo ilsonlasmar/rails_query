@@ -1,0 +1,17 @@
+/.bundle/
+/.yardoc
+/_yardoc/
+/coverage/
+/doc/
+/pkg/
+/spec/reports/
+/tmp/
+Gemfile.lock
+.vscode
+.DS_Store
+tmp/
+vendor/*
+.ruby-version
+.ruby-gemset
+*.gem
+.tool-versions
