@@ -4,6 +4,7 @@ require "rails/generators"
 
 module RailsQuery
   module Generators
+    # Generator that creates a provider and queries based on the provided name and query list.
     class QueryGenerator < Rails::Generators::NamedBase
       source_root File.expand_path("templates", __dir__)
 
@@ -35,20 +36,20 @@ module RailsQuery
       end
 
       def add_queries_to_provider
-          provider_path = "app/providers/#{file_name}_provider.rb"
-          return unless File.exist?(provider_path)
+        provider_path = "app/providers/#{file_name}_provider.rb"
+        return unless File.exist?(provider_path)
 
-          content = File.read(provider_path)
+        content = File.read(provider_path)
 
-          pending_queries = queries.reject do |query|
-            content.match?(/^\s*query\s+:#{Regexp.escape(query)}\b/)
-          end
+        pending_queries = queries.reject do |query|
+          content.match?(/^\s*query\s+:#{Regexp.escape(query)}\b/)
+        end
 
-          return if pending_queries.empty?
+        return if pending_queries.empty?
 
-          inject_into_file provider_path, after: "include RailsQuery::DSL\n" do
-            pending_queries.map { |query| "\n  query :#{query}\n" }.join
-          end
+        inject_into_file provider_path, after: "include RailsQuery::DSL\n" do
+          pending_queries.map { |query| "\n  query :#{query}\n" }.join
+        end
       end
 
       def show_usage

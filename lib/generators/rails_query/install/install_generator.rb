@@ -4,6 +4,7 @@ require "rails/generators"
 
 module RailsQuery
   module Generators
+    # Generator that installs RailsQuery with a provider and example query.
     class InstallGenerator < Rails::Generators::Base
       source_root File.expand_path("templates", __dir__)
 
@@ -37,7 +38,7 @@ module RailsQuery
 
       def add_autoload_path
         inject_into_file "config/application.rb",
-          after: "class Application < Rails::Application\n" do
+                         after: "class Application < Rails::Application\n" do
           "    config.autoload_paths << Rails.root.join('app/providers')\n"
         end
       end
