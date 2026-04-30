@@ -1,0 +1,18 @@
+# frozen_string_literal: true
+
+# Fake query to simulate fetching user data.
+class User::Queries::FindUserQuery < RailsQuery::Query
+  ttl 5.minutes
+
+  key do |id|
+    [ "user", id ]
+  end
+
+  def resolve(id)
+    {
+      id: id,
+      name: "User #{id}",
+      fetched_at: Time.current
+    }
+  end
+end

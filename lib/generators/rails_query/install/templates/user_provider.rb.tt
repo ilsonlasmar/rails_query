@@ -1,0 +1,8 @@
+# frozen_string_literal: true
+
+class UserProvider
+  include RailsQuery::DSL
+
+  # User::Queries::FindUserQuery
+  query :find_user
+end

@@ -1,0 +1,11 @@
+# frozen_string_literal: true
+
+RailsQuery.configure do |config|
+  config.default_ttl = 5.minutes
+  config.namespace = "<%= @query_namespace %>"
+
+  # Exemplo com Redis:
+  # config.cache_store = ActiveSupport::Cache::RedisCacheStore.new(
+  #   url: ENV["REDIS_URL"]
+  # )
+end

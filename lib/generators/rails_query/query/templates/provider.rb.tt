@@ -1,0 +1,5 @@
+# frozen_string_literal: true
+
+class <%= @provider_module.camelize %>Provider
+  include RailsQuery::DSL
+end
