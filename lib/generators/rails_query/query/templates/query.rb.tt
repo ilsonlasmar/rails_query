@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class <%= @provider_module %>::Queries::<%= @query_name.camelize %>Query < RailsQuery::Query
-  ttl 5.minutes
+  ttl 30.seconds
 
   # TODO: implement cache key strategy
   # key do |id|
@@ -16,4 +16,3 @@ class <%= @provider_module %>::Queries::<%= @query_name.camelize %>Query < Rails
     # response.body
   end
 end
-

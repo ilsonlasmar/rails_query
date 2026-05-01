@@ -2,7 +2,7 @@
 
 # Fake query to simulate fetching user data.
 class User::Queries::FindUserQuery < RailsQuery::Query
-  ttl 5.minutes
+  ttl 30.seconds
 
   key do |id|
     [ "user", id ]

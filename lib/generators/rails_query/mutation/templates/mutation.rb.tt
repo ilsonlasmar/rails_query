@@ -1,0 +1,13 @@
+# frozen_string_literal: true
+
+class <%= @provider_module %>::Mutations::<%= @mutation_name.camelize %>Mutation < RailsQuery::Mutation
+  invalidates "<%= @provider_module %>Provider"
+
+  def resolve(*args, **opts)
+    # TODO: implement the actual API call to mutate
+
+    # client = opts.fetch(:client)
+    # response = client.post("/users")
+    # response.body
+  end
+end
