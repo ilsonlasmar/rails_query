@@ -15,6 +15,30 @@ RailsQuery introduces a clear pattern for handling external APIs using:
 
 ---
 
+## Why RailsQuery?
+
+In most Rails projects, external API calls end up:
+
+- scattered across services, models, and controllers
+- duplicated HTTP setup (Faraday, headers, auth)
+- hard to track and debug
+- inconsistent caching strategies
+- tightly coupled and difficult to test
+
+RailsQuery solves this by centralizing and standardizing all external interactions.
+
+  architecture:
+
+```
+app/providers/
+  user_provider.rb
+  user/
+    queries/
+      find_user_query.rb
+    mutations/
+      create_user_mutation.rb
+```
+
 
 - [Installation](#installation)
 - [Usage](#usage)
@@ -35,13 +59,14 @@ gem "rails_query"
 Then
 ```bash
 bundle install
-rails generate rails_query:install
 ```
 
 ## Usage
 
+### Generating configuration
+
 ### Provider
-Providers define configuration and act as the entry point.
+Providers define configuration and and context (HTTP client, base URL, auth)
 
 ```ruby
 class UserProvider
@@ -62,8 +87,40 @@ end
 ```
 
 ### Query
+Queries are responsible for reading data and caching results.
+
+```ruby
+class User::Queries::FindUserQuery < RailsQuery::Query
+  ttl 5.minutes
+
+  key do |id|
+    ["users", id]
+  end
+
+  def resolve(id, opts = {})
+    client = opts.fetch(:client)
+    client.get("/users/#{id}").body
+  end
+end
+```
+Basic usage:
+```ruby
+UserProvider.find_user(1)
+```
 
 ### Mutation
+Mutations are responsible for writing data and invalidating cache.
+
+```ruby
+class User::Mutations::CreateUserMutation < RailsQuery::Mutation
+  invalidates "UserProvider"
+
+  def resolve(params, opts = {})
+    client = opts.fetch(:client)
+    client.post("/users", params).body
+  end
+end
+```
 
 ## Development
 
