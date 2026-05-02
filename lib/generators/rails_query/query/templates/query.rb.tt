@@ -1,0 +1,18 @@
+# frozen_string_literal: true
+
+class <%= @provider_module %>::Queries::<%= @query_name.camelize %>Query < RailsQuery::Query
+  ttl 30.seconds
+
+  # TODO: implement cache key strategy
+  # key do |id|
+  #   [ "<%= file_name %>", id ]
+  # end
+
+  def resolve(*args, **opts)
+    # TODO: implement the actual API call to fetch
+
+    # client = opts.fetch(:client)
+    # response = client.get("/users/#{args.first}")
+    # response.body
+  end
+end
