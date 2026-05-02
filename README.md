@@ -13,7 +13,6 @@ RailsQuery introduces a clear pattern for handling external APIs using:
 - Queries (read + cache) - **how to read**
 - Mutations (write + invalidate) - **how to write**
 
----
 
 ## Why RailsQuery?
 
@@ -39,6 +38,8 @@ app/providers/
       create_user_mutation.rb
 ```
 
+---
+
 ## Index
 - [Installation](#installation)
 - [Usage](#usage)
@@ -49,9 +50,6 @@ app/providers/
 - [Caching](#caching)
 - [Invalidation](#invalidation)
 
-
-
----
 
 ## Installation
 
