@@ -45,6 +45,10 @@ app/providers/
   - [Provider](#provider)
   - [Query](#query)
   - [Mutation](#mutation)
+- [Generators](#generators)
+- [Caching](#caching)
+- [Invalidation](#invalidation)
+
 
 
 ---
@@ -63,7 +67,10 @@ bundle install
 
 ## Usage
 
-### Generating configuration
+### Install setup
+```bash
+rails g rails_query:install
+```
 
 ### Provider
 Providers define configuration and and context (HTTP client, base URL, auth)
@@ -121,6 +128,46 @@ class User::Mutations::CreateUserMutation < RailsQuery::Mutation
   end
 end
 ```
+
+## Generators
+Generate queries:
+
+```bash
+rails g rails_query:query User list_users
+```
+
+Generate mutations:
+
+```bash
+rails g rails_query:mutation User update_user
+```
+
+## Caching
+Queries are cached automatically based on:
+
+- class name
+- arguments
+- keyword arguments (kwargs)
+
+```ruby
+UserProvider.find_user(1)
+UserProvider.find_user(1) # cached
+```
+
+You can configure TTL:
+
+```ruby
+ttl 5.minutes
+```
+
+## Invalidation
+
+Mutations invalidate cache after execution.
+
+```ruby
+invalidates "UserProvider"
+```
+
 
 ## Development
 
