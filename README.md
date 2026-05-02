@@ -46,6 +46,7 @@ app/providers/
   - [Provider](#provider)
   - [Query](#query)
   - [Mutation](#mutation)
+- [Dynamic Values](#dynamic-values)
 - [Generators](#generators)
 - [Caching](#caching)
 - [Invalidation](#invalidation)
@@ -124,6 +125,35 @@ class User::Mutations::CreateUserMutation < RailsQuery::Mutation
     client = opts.fetch(:client)
     client.post("/users", params).body
   end
+end
+```
+
+## Dynamic Values
+RailsQuery allows passing dynamic values (e.g., auth tokens, headers) at call time using `.with(...)`.
+
+### Example
+```ruby
+UserProvider
+  .with(token: "abc123")
+  .find_user(1)
+```
+
+
+```ruby
+class UserProvider
+  include RailsQuery::Provider
+
+  base_url ENV["USER_API_URL"]
+
+  client do
+    Faraday.new(url: base_url) do |f|
+      f.request :json
+      f.response :json
+      f.headers["Authorization"] = "Bearer #{context[:token]}"
+    end
+  end
+
+  query :find_user
 end
 ```
 
