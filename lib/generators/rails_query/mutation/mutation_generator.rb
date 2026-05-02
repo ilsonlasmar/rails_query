@@ -47,7 +47,7 @@ module RailsQuery
 
         return if pending_mutations.empty?
 
-        inject_into_file provider_path, after: "include RailsQuery::DSL\n" do
+        inject_into_file provider_path, after: "include RailsQuery::Adapter\n" do
           pending_mutations.map { |mutation| "\n  mutation :#{mutation}\n" }.join
         end
       end

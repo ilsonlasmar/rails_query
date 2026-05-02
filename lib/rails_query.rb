@@ -9,7 +9,7 @@ require_relative "rails_query/configuration"
 require_relative "rails_query/client"
 require_relative "rails_query/query"
 require_relative "rails_query/mutation"
-require_relative "rails_query/dsl"
+require_relative "rails_query/adapter"
 
 # Main module for RailsQuery
 module RailsQuery

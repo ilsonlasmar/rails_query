@@ -7,11 +7,11 @@
 A lightweight data-fetching and mutation layer for Ruby on Rails.
 
 
-RailsQuery provides a structured way to interact with external APIs using:
+RailsQuery introduces a clear pattern for handling external APIs using:
 
-- Providers (configuration + context)
-- Queries (read + cache)
-- Mutations (write + invalidate)
+- Providers  (configuration + context) - **how to connect**
+- Queries (read + cache) - **how to read**
+- Mutations (write + invalidate) - **how to write**
 
 ---
 
@@ -45,7 +45,7 @@ Providers define configuration and act as the entry point.
 
 ```ruby
 class UserProvider
-  include RailsQuery::DSL
+  include RailsQuery::Adapter
 
   base_url ENV["USER_API_URL"]
 
