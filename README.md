@@ -1,6 +1,6 @@
 # RailsQuery
 
-[![Gem Version](https://badge.fury.io/rb/rails_query.svg)](http://badge.fury.io/rb/rails_query)
+[![Gem Version](https://img.shields.io/gem/v/rails_query.svg?label=RailsQuery&labelColor=31373d&color=29af48)](https://rubygems.org/gems/rails_query)
 [![Build Status](https://github.com/ilsonlasmar/rails_query/actions/workflows/main.yml/badge.svg)](https://github.com/ilsonlasmar/rails_query/actions/workflows/main.yml)
 
 
