@@ -1,16 +1,10 @@
+# frozen_string_literal: true
+
 # test/rails_query/mutation_test.rb
 
 require "test_helper"
 
 module MutationFixtures
-  class TestQuery < RailsQuery::Query
-    key { |id| "test_query:#{id}" }
-
-    def resolve(id, _opts = {})
-      { id: id, time: Time.now.to_f }
-    end
-  end
-
   class TestQuery < RailsQuery::Query
     key { |id| "test_query:#{id}" }
 
@@ -38,7 +32,6 @@ class MutationTest < Minitest::Test
     first = MutationFixtures::TestQuery.call(1, provider: "TestProvider")
     TestMutation.call({ id: 1 })
     second = MutationFixtures::TestQuery.call(1, provider: "TestProvider")
-
 
     refute_equal first, second
   end

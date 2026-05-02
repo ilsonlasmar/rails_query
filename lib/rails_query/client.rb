@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module RailsQuery
+  # Internal client class responsible for cache interactions
   class Client
     def initialize(config)
       @cache       = config.cache_store

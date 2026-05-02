@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module RailsQuery
+  # Base class for mutations
   class Mutation
     class << self
       def call(*args, **opts)

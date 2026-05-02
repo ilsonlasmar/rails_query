@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module RailsQuery
+  # Configuration class for RailsQuery
   class Configuration
     attr_accessor :cache_store, :default_ttl, :namespace, :logger
 

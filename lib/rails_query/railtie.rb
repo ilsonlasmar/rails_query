@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module RailsQuery
+  # Railtie to integrate with Rails applications
   class Railtie < Rails::Railtie
     initializer "rails_query.setup" do
       RailsQuery.configure do |config|

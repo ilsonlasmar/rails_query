@@ -1,11 +1,13 @@
 # frozen_string_literal: true
 
 module RailsQuery
+  # DSL module to be included in provider classes for defining queries and mutations
   module DSL
     def self.included(base)
       base.extend(ClassMethods)
     end
 
+    # Class methods for defining base URL, client, queries, and mutations
     module ClassMethods
       def base_url(url = nil)
         return @base_url if url.nil?
@@ -19,6 +21,7 @@ module RailsQuery
         @client_block = block
       end
 
+      # rubocop:disable Metrics/MethodLength
       def query(name, ttl: nil, &block)
         define_method(name) do |*args, **opts|
           opts_with_context = inject_context(**opts)
@@ -54,6 +57,7 @@ module RailsQuery
           instance.public_send(name, *args, **opts)
         end
       end
+      # rubocop:enable Metrics/MethodLength
 
       private
 
@@ -95,14 +99,14 @@ module RailsQuery
 
     def resolve_query_class(name)
       provider = self.class.name.sub("Provider", "")
-      class_name = name.to_s.camelize + "Query"
+      class_name = "#{name.to_s.camelize}Query"
 
       "#{provider}::Queries::#{class_name}".constantize
     end
 
     def resolve_mutation_class(name)
       provider = self.class.name.sub("Provider", "")
-      class_name = name.to_s.camelize + "Mutation"
+      class_name = "#{name.to_s.camelize}Mutation"
 
       "#{provider}::Mutations::#{class_name}".constantize
     end

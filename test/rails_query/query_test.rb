@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # test/rails_query/query_test.rb
 
 require "test_helper"

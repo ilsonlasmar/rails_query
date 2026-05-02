@@ -11,6 +11,7 @@ require_relative "rails_query/query"
 require_relative "rails_query/mutation"
 require_relative "rails_query/dsl"
 
+# Main module for RailsQuery
 module RailsQuery
   class << self
     def configuration
