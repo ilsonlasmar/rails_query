@@ -39,7 +39,7 @@ app/providers/
       create_user_mutation.rb
 ```
 
-
+## Index
 - [Installation](#installation)
 - [Usage](#usage)
   - [Provider](#provider)
