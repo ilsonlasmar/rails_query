@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 module RailsQuery
-  # DSL module to be included in provider classes for defining queries and mutations
-  module DSL
+  # Adapter module to be included in provider classes for defining queries and mutations
+  module Adapter
     def self.included(base)
       base.extend(ClassMethods)
     end
@@ -62,7 +62,7 @@ module RailsQuery
       private
 
       def instance
-        RailsQuery::DSL.instance_for(self)
+        RailsQuery::Adapter.instance_for(self)
       end
     end
 

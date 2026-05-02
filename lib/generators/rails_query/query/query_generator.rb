@@ -47,7 +47,7 @@ module RailsQuery
 
         return if pending_queries.empty?
 
-        inject_into_file provider_path, after: "include RailsQuery::DSL\n" do
+        inject_into_file provider_path, after: "include RailsQuery::Adapter\n" do
           pending_queries.map { |query| "\n  query :#{query}\n" }.join
         end
       end
