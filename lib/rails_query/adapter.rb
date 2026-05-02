@@ -21,6 +21,11 @@ module RailsQuery
         @client_block = block
       end
 
+      def with(context = {})
+        instance.instance_variable_set(:@_context, context)
+        instance
+      end
+
       # rubocop:disable Metrics/MethodLength
       def query(name, ttl: nil, &block)
         define_method(name) do |*args, **opts|
@@ -69,6 +74,10 @@ module RailsQuery
     def self.instance_for(klass)
       @instances ||= {}
       @instances[klass] ||= klass.new
+    end
+
+    def context
+      @_context || {}
     end
 
     def base_url
