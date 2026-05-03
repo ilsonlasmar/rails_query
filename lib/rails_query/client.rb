@@ -4,12 +4,12 @@ module RailsQuery
   # Internal client class responsible for cache interactions
   class Client
     def initialize(config)
-      @cache       = config.cache_store
-      @default_ttl = config.default_ttl
+      @cache         = config.cache_store
+      @default_ttl   = config.default_ttl
       @default_stale = config.default_stale
-      @executor    = config.executor
-      @namespace   = config.namespace
-      @logger      = config.logger
+      @executor      = config.executor
+      @namespace     = config.namespace
+      @logger        = config.logger
     end
 
     def fetch(key, ttl: @default_ttl, stale: @default_stale, provider: nil, &block)
@@ -18,14 +18,8 @@ module RailsQuery
 
       if entry
         age = Time.now - entry[:fetched_at]
-
-        return entry[:data] if stale >= age
-
-        if stale < age
-          async_refetch(namespaced, ttl, provider, &block)
-
-          return entry[:data]
-        end
+        async_refetch(namespaced, ttl, provider, &block) if stale && stale < age
+        return entry[:data]
       end
 
       data = block.call
