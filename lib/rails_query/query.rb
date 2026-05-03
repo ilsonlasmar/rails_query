@@ -13,6 +13,11 @@ module RailsQuery
         @ttl
       end
 
+      def stale(value = nil)
+        @stale = value if value
+        @stale
+      end
+
       def key(&block)
         @key_block = block if block
         @key_block
@@ -22,13 +27,17 @@ module RailsQuery
     def call(*args, **opts)
       key = build_key(*args, **opts)
       provider_class = opts[:provider] || self.class.name
-      RailsQuery.client.fetch(key, ttl: ttl, provider: provider_class) do
+      RailsQuery.client.fetch(key, ttl: ttl, stale: stale, provider: provider_class) do
         kwargs? ? resolve(*args, **opts) : resolve(*args)
       end
     end
 
     def ttl
       self.class.ttl || RailsQuery.configuration.default_ttl
+    end
+
+    def stale
+      self.class.stale || RailsQuery.configuration.default_stale
     end
 
     def build_key(*args, **opts)

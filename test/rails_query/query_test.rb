@@ -16,15 +16,6 @@ module QueryFixtures
   end
 end
 
-class TestQuery < RailsQuery::Query
-  ttl 1.minute
-  key { |id, flag: "false"| ["test_query", id, flag] }
-
-  def resolve(id, opts = {})
-    { id: id, time: Time.now.to_f, flag: opts[:flag] }
-  end
-end
-
 class QueryTest < Minitest::Test
   def setup
     RailsQuery.invalidate_provider("TestProvider")
