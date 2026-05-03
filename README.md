@@ -50,6 +50,7 @@ app/providers/
 - [Generators](#generators)
 - [Caching](#caching)
 - [Invalidation](#invalidation)
+- [Stale Time](#stale-time)
 
 
 ## Installation
@@ -141,7 +142,7 @@ UserProvider
 
 ```ruby
 class UserProvider
-  include RailsQuery::Provider
+  include RailsQuery::Adapter
 
   base_url ENV["USER_API_URL"]
 
@@ -196,6 +197,41 @@ Mutations invalidate cache after execution.
 invalidates "UserProvider"
 ```
 
+# Stale Time
+`stale` defines how long cached data is considered **fresh**.
+
+#### How it works
+- While data is **fresh**:
+  - RailsQuery will **not trigger new requests**
+  - Cached data is returned immediately
+  - No background refetch occurs
+
+- When data becomes **stale**:
+  - Data remains in cache
+  - RailsQuery may **refetch in the background** when a trigger occurs
+
+### Default behavior
+Stale behavior is disabled by default
+
+```ruby
+stale nil
+```
+
+### Obs.:
+Never configure `stale` to be greater than your cache expiration (TTL or equivalent).
+
+If data is considered fresh for longer than it actually exists in cache, RailsQuery will be forced to fetch everything again from the source, losing the benefit of freshness.
+
+
+### Stale vs Cache Expiration (TTL)
+
+| Feature | Stale | Cache expiration (TTL) |
+|--------|--------|------------------------|
+| **What it controls** | When data is considered outdated and eligible for refetch | How long data remains stored in cache |
+| **Does the data still exist?** | Yes, but marked as stale | Yes, until it expires and is removed |
+| **Triggers new request?** | No while fresh; yes when stale (on next call/trigger) | Not directly; only after cache is gone |
+| **Default** | nil (disabled) | 0 (not cache store) |
+| **Example** | 0 (revalidate always) | 5 minutes (after disuse)  |
 
 ## Development
 
