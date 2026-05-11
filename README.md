@@ -128,6 +128,10 @@ class User::Mutations::CreateUserMutation < RailsQuery::Mutation
   end
 end
 ```
+Basic usage:
+```ruby
+UserProvider.create_user({ name: "Dominica Boehm Ret.", email: "user@example.com" })
+```
 
 ## Dynamic Values
 RailsQuery allows passing dynamic values (e.g., auth tokens, headers) at call time using `.with(...)`.
